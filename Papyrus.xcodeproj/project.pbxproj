@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		D84176991E8D6E1A000B0640 /* Papyrus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D841768F1E8D6E1A000B0640 /* Papyrus.framework */; };
 		D84176A01E8D6E1A000B0640 /* Papyrus.h in Headers */ = {isa = PBXBuildFile; fileRef = D84176921E8D6E1A000B0640 /* Papyrus.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D84176AA1E8D7563000B0640 /* SequentialCollection .swift in Sources */ = {isa = PBXBuildFile; fileRef = D84176A91E8D7563000B0640 /* SequentialCollection .swift */; };
+		D84176AE1E8D8178000B0640 /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84176AD1E8D8178000B0640 /* UICollectionView+Extensions.swift */; };
+		D84176B01E8D8A15000B0640 /* AssociatedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84176AF1E8D8A15000B0640 /* AssociatedObject.swift */; };
+		D84176B21E8DA9C9000B0640 /* UIScrollView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84176B11E8DA9C9000B0640 /* UIScrollView+Extensions.swift */; };
+		D84176B41E8DBF4D000B0640 /* UIRefreshControl+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84176B31E8DBF4D000B0640 /* UIRefreshControl+Extensions.swift */; };
+		D8D737AB1E8EEDD600CBFE46 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D737AA1E8EEDD600CBFE46 /* Reusable.swift */; };
+		D8D737AD1E8EEE6600CBFE46 /* NibInstantiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D737AC1E8EEE6600CBFE46 /* NibInstantiable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +34,13 @@
 		D84176931E8D6E1A000B0640 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D84176981E8D6E1A000B0640 /* PapyrusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PapyrusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D841769F1E8D6E1A000B0640 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D84176A91E8D7563000B0640 /* SequentialCollection .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SequentialCollection .swift"; sourceTree = "<group>"; };
+		D84176AD1E8D8178000B0640 /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
+		D84176AF1E8D8A15000B0640 /* AssociatedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssociatedObject.swift; sourceTree = "<group>"; };
+		D84176B11E8DA9C9000B0640 /* UIScrollView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extensions.swift"; sourceTree = "<group>"; };
+		D84176B31E8DBF4D000B0640 /* UIRefreshControl+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIRefreshControl+Extensions.swift"; sourceTree = "<group>"; };
+		D8D737AA1E8EEDD600CBFE46 /* Reusable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		D8D737AC1E8EEE6600CBFE46 /* NibInstantiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibInstantiable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +85,13 @@
 			children = (
 				D84176921E8D6E1A000B0640 /* Papyrus.h */,
 				D84176931E8D6E1A000B0640 /* Info.plist */,
+				D84176AF1E8D8A15000B0640 /* AssociatedObject.swift */,
+				D84176A91E8D7563000B0640 /* SequentialCollection .swift */,
+				D84176AD1E8D8178000B0640 /* UICollectionView+Extensions.swift */,
+				D84176B11E8DA9C9000B0640 /* UIScrollView+Extensions.swift */,
+				D84176B31E8DBF4D000B0640 /* UIRefreshControl+Extensions.swift */,
+				D8D737AA1E8EEDD600CBFE46 /* Reusable.swift */,
+				D8D737AC1E8EEE6600CBFE46 /* NibInstantiable.swift */,
 			);
 			path = Papyrus;
 			sourceTree = "<group>";
@@ -146,6 +167,7 @@
 					D841768E1E8D6E1A000B0640 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 242RHFAA76;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					D84176971E8D6E1A000B0640 = {
@@ -195,6 +217,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8D737AB1E8EEDD600CBFE46 /* Reusable.swift in Sources */,
+				D8D737AD1E8EEE6600CBFE46 /* NibInstantiable.swift in Sources */,
+				D84176B01E8D8A15000B0640 /* AssociatedObject.swift in Sources */,
+				D84176B41E8DBF4D000B0640 /* UIRefreshControl+Extensions.swift in Sources */,
+				D84176AA1E8D7563000B0640 /* SequentialCollection .swift in Sources */,
+				D84176AE1E8D8178000B0640 /* UICollectionView+Extensions.swift in Sources */,
+				D84176B21E8DA9C9000B0640 /* UIScrollView+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +347,7 @@
 		D84176A41E8D6E1A000B0640 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 242RHFAA76;
@@ -330,6 +360,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.drumnart.Papyrus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -337,6 +368,7 @@
 		D84176A51E8D6E1A000B0640 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 242RHFAA76;
@@ -356,6 +388,7 @@
 		D84176A71E8D6E1A000B0640 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 242RHFAA76;
 				INFOPLIST_FILE = PapyrusTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -368,6 +401,7 @@
 		D84176A81E8D6E1A000B0640 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 242RHFAA76;
 				INFOPLIST_FILE = PapyrusTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
