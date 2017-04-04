@@ -14,5 +14,6 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/drumnart/Papyrus.git", :tag => s.version.to_s }
   s.source_files  = "Papyrus", "Papyrus/**/*.{h,m,swift}"
   s.requires_arc = true
-
+  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '3' }
+  
 end
