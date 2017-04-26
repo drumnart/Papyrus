@@ -26,6 +26,8 @@ public protocol SequentialCollection {
   @discardableResult func retrieveNumberOfItems(_ retriever: NumberOfItemsRetriever) -> OwnerType
   @discardableResult func retrieveCell(_ retriever: CellRetriever) -> OwnerType
   @discardableResult func retrieveReusableView(_ retiever: ReusableViewRetriever) -> OwnerType
+  
+  @discardableResult func onDidEndDisplayingCell(_ handler: @escaping DidEndDisplayingCellHandler) -> OwnerType
   @discardableResult func onDidSelectItem(_ handler: SelectionHandler) -> OwnerType
   
   @discardableResult func retrieveItemSize(_ retriever: ItemSizeRetriever) -> OwnerType
@@ -61,6 +63,11 @@ extension SequentialCollection where Self: UICollectionView {
     _ collectionView: UICollectionView,
     _ kind: SectionElementKind,
     _ indexPath: IndexPath) -> UICollectionReusableView
+  
+  public typealias DidEndDisplayingCellHandler = (
+    _ collectionView: UICollectionView,
+    _ cell: UICollectionViewCell,
+    _ indexPath: IndexPath) -> Void
   
   public typealias SelectionHandler = (
     _ collectionView: UICollectionView,
@@ -142,6 +149,11 @@ extension SequentialCollection where Self: UICollectionView {
     return self
   }
   
+  @discardableResult public func onDidEndDisplayingCell(_ handler: @escaping DidEndDisplayingCellHandler) -> Self {
+    hooksHolder.didEndDisplayingCellHandler = handler
+    return self
+  }
+  
   @discardableResult public func onDidSelectItem(_ handler: @escaping SelectionHandler) -> Self {
     hooksHolder.selectionHandler = handler
     return self
@@ -199,6 +211,8 @@ public class CollectionViewHooksHolder {
   fileprivate(set) lazy var numberOfItemsRetriever: SequentialCollection.NumberOfItemsRetriever = { _ in return 1 }
   fileprivate(set) lazy var cellRetriever: SequentialCollection.CellRetriever = { _ in return UICollectionViewCell() }
   fileprivate(set) lazy var reusableViewRetriever: SequentialCollection.ReusableViewRetriever = { _ in return UICollectionReusableView() }
+  
+  fileprivate(set) lazy var didEndDisplayingCellHandler: SequentialCollection.DidEndDisplayingCellHandler = { _ in }
   fileprivate(set) lazy var selectionHandler: SequentialCollection.SelectionHandler = { _ in }
   
   fileprivate(set) lazy var itemSizeRetriever: SequentialCollection.ItemSizeRetriever = { (_, layout, _) in return layout.itemSize }
@@ -244,6 +258,10 @@ extension Proxy: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegateFlowLayout
 extension Proxy: UICollectionViewDelegateFlowLayout {
+  
+  func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    hooksHolder.didEndDisplayingCellHandler(collectionView, cell, indexPath)
+  }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     hooksHolder.selectionHandler(collectionView, indexPath)
