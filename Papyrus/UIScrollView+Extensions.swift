@@ -22,26 +22,26 @@ extension UIScrollView {
     }
   }
   
-  public func translation(in view: UIView? = nil) -> CGPoint {
+  open func translation(in view: UIView? = nil) -> CGPoint {
     return panGestureRecognizer.translation(in: view ?? self)
   }
   
-  @nonobjc @discardableResult public func setContentInset(_ contentInset: UIEdgeInsets) -> Self {
+  @nonobjc @discardableResult open func setContentInset(_ contentInset: UIEdgeInsets) -> Self {
     self.contentInset = contentInset
     return self
   }
   
-  @nonobjc @discardableResult public func shiftContent(by contentOffset: CGPoint, animated: Bool) -> Self {
+  @nonobjc @discardableResult open func shiftContent(by contentOffset: CGPoint, animated: Bool) -> Self {
     self.setContentOffset(contentOffset, animated: animated)
     return self
   }
   
-  @nonobjc @discardableResult public func scrollsToTop(_ boolValue: Bool) -> Self {
+  @nonobjc @discardableResult open func scrollsToTop(_ boolValue: Bool) -> Self {
     self.scrollsToTop = boolValue
     return self
   }
   
-  @nonobjc @discardableResult public func setDecelerationRate(_ rate: DecelerationRate) -> Self {
+  @nonobjc @discardableResult open func setDecelerationRate(_ rate: DecelerationRate) -> Self {
     self.decelerationRate = rate.rawValue
     return self
   }

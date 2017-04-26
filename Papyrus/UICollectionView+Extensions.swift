@@ -9,11 +9,11 @@
 // MARK: - Common `UICollectionView` extensions
 
 extension UICollectionView {
-  public var flowLayout: UICollectionViewFlowLayout? {
+  open var flowLayout: UICollectionViewFlowLayout? {
     return collectionViewLayout as? UICollectionViewFlowLayout
   }
   
-  public var scrollDirection: UICollectionViewScrollDirection {
+  open var scrollDirection: UICollectionViewScrollDirection {
     get {
       return flowLayout?.scrollDirection ?? .vertical
     }
@@ -22,30 +22,30 @@ extension UICollectionView {
     }
   }
   
-  public var interItemSpacing: CGFloat {
+  open var interItemSpacing: CGFloat {
     return flowLayout?.minimumInteritemSpacing ?? 0
   }
   
-  public var itemSize: CGSize {
+  open var itemSize: CGSize {
     return flowLayout?.itemSize ?? .zero
   }
   
-  @nonobjc @discardableResult func setBackgroundView(_ backgroundView: UIView?) -> Self {
+  @nonobjc @discardableResult open func setBackgroundView(_ backgroundView: UIView?) -> Self {
     self.backgroundView = backgroundView
     return self
   }
   
-  @nonobjc @discardableResult public func setScrollDirection(_ direction: UICollectionViewScrollDirection) -> Self {
+  @nonobjc @discardableResult open func setScrollDirection(_ direction: UICollectionViewScrollDirection) -> Self {
     flowLayout?.scrollDirection = direction
     return self
   }
   
-  @discardableResult public func setItemSize(_ itemSize: CGSize) -> Self {
+  @discardableResult open func setItemSize(_ itemSize: CGSize) -> Self {
     flowLayout?.itemSize = itemSize
     return self
   }
   
-  @discardableResult public func setInteritemSpacing(_ spacing: CGFloat) -> Self {
+  @discardableResult open func setInteritemSpacing(_ spacing: CGFloat) -> Self {
     flowLayout?.minimumInteritemSpacing = spacing
     return self
   }
