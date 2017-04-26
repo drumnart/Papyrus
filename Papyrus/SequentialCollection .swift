@@ -46,7 +46,7 @@ fileprivate struct AssociatedKey {
   static var proxy = "proxyKey"
 }
 
-extension SequentialCollection where Self: UICollectionView {
+public extension SequentialCollection where Self: UICollectionView {
   
   public typealias NumberOfSectionsRetriever = (
     _ collectionView: UICollectionView) -> Int
