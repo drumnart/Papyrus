@@ -53,6 +53,31 @@ extension Papyrus where Type: CollectionView {
 
 extension CollectionView {
   
+  public enum SectionElementKind {
+    case header
+    case footer
+    case any(String)
+    
+    static let Header = UICollectionElementKindSectionHeader
+    static let Footer = UICollectionElementKindSectionFooter
+    
+    public init(_ rawValue: String) {
+      switch rawValue {
+      case SectionElementKind.Header: self = .header
+      case SectionElementKind.Footer: self = .footer
+      default: self = .any(rawValue)
+      }
+    }
+    
+    public var value: String {
+      switch self {
+      case .header: return SectionElementKind.Header
+      case .footer: return SectionElementKind.Footer
+      case .any(let rawValue): return rawValue
+      }
+    }
+  }
+  
   /// Freeze collection view sections' header / footer to visible bounds where layout is UICollectionViewFlowLayout
   @discardableResult func sectionElements(_ kinds: SectionElementKindSet, shouldPinToVisibleBounds value: Bool) -> Self {
     guard let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout else {
@@ -68,31 +93,6 @@ extension CollectionView {
       }
     }
     return self
-  }
-}
-
-public enum SectionElementKind {
-  case header
-  case footer
-  case any(String)
-  
-  static let Header = UICollectionElementKindSectionHeader
-  static let Footer = UICollectionElementKindSectionFooter
-  
-  public init(_ rawValue: String) {
-    switch rawValue {
-    case SectionElementKind.Header: self = .header
-    case SectionElementKind.Footer: self = .footer
-    default: self = .any(rawValue)
-    }
-  }
-  
-  public var value: String {
-    switch self {
-    case .header: return SectionElementKind.Header
-    case .footer: return SectionElementKind.Footer
-    case .any(let rawValue): return rawValue
-    }
   }
 }
 

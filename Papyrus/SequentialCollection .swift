@@ -35,7 +35,7 @@ extension Papyrus where Type: CollectionView {
   
   public typealias ReusableViewRetriever = (
     _ collectionView: UICollectionView,
-    _ kind: SectionElementKind,
+    _ kind: Type.SectionElementKind,
     _ indexPath: IndexPath) -> UICollectionReusableView
   
   public typealias DidEndDisplayingCellHandler = (
@@ -226,7 +226,7 @@ extension Proxy: UICollectionViewDataSource {
   }
   
   func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-    return hooksHolder.reusableViewRetriever(collectionView, SectionElementKind(kind), indexPath)
+    return hooksHolder.reusableViewRetriever(collectionView, UICollectionView.SectionElementKind(kind), indexPath)
   }
 }
 
