@@ -8,9 +8,9 @@
 
 // MARK: - Common `UICollectionView` extensions
 
-public extension UICollectionView {
+extension Papyrus where Type: CollectionView {
   public var flowLayout: UICollectionViewFlowLayout? {
-    return collectionViewLayout as? UICollectionViewFlowLayout
+    return instance.collectionViewLayout as? UICollectionViewFlowLayout
   }
   
   public var scrollDirection: UICollectionViewScrollDirection {
@@ -31,7 +31,7 @@ public extension UICollectionView {
   }
   
   @nonobjc @discardableResult public func setBackgroundView(_ backgroundView: UIView?) -> Self {
-    self.backgroundView = backgroundView
+    instance.backgroundView = backgroundView
     return self
   }
   
@@ -51,10 +51,10 @@ public extension UICollectionView {
   }
 }
 
-extension UICollectionView {
+extension CollectionView {
   
   /// Freeze collection view sections' header / footer to visible bounds where layout is UICollectionViewFlowLayout
-  @discardableResult public func sectionElements(_ kinds: SectionElementKindSet, shouldPinToVisibleBounds value: Bool) -> Self {
+  @discardableResult func sectionElements(_ kinds: SectionElementKindSet, shouldPinToVisibleBounds value: Bool) -> Self {
     guard let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout else {
       print("Couldn't pin header/footer to visible bounds because current layout is not of type UICollectionViewFlowLayout.")
       return self
@@ -79,7 +79,7 @@ public enum SectionElementKind {
   static let Header = UICollectionElementKindSectionHeader
   static let Footer = UICollectionElementKindSectionFooter
   
-  init(_ rawValue: String) {
+  public init(_ rawValue: String) {
     switch rawValue {
     case SectionElementKind.Header: self = .header
     case SectionElementKind.Footer: self = .footer
@@ -87,7 +87,7 @@ public enum SectionElementKind {
     }
   }
   
-  var value: String {
+  public var value: String {
     switch self {
     case .header: return SectionElementKind.Header
     case .footer: return SectionElementKind.Footer

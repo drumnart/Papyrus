@@ -16,37 +16,11 @@ public enum CollectionDelegate {
   case custom(UICollectionViewDelegate)
 }
 
-public protocol SequentialCollection {
-  
-  associatedtype OwnerType
-  
-  @discardableResult func setDataSource(_ dataSource: CollectionDataSource) -> OwnerType
-  @discardableResult func setDelegate(_ delegate: CollectionDelegate) -> OwnerType
-  @discardableResult func retrieveNumberOfSections(_ retriever: NumberOfSectionsRetriever) -> OwnerType
-  @discardableResult func retrieveNumberOfItems(_ retriever: NumberOfItemsRetriever) -> OwnerType
-  @discardableResult func retrieveCell(_ retriever: CellRetriever) -> OwnerType
-  @discardableResult func retrieveReusableView(_ retiever: ReusableViewRetriever) -> OwnerType
-  
-  @discardableResult func onDidEndDisplayingCell(_ handler: @escaping DidEndDisplayingCellHandler) -> OwnerType
-  @discardableResult func onDidSelectItem(_ handler: SelectionHandler) -> OwnerType
-  
-  @discardableResult func retrieveItemSize(_ retriever: ItemSizeRetriever) -> OwnerType
-  @discardableResult func retrieveLineSpacing(_ retriever: SpacingRetriever) -> OwnerType
-  @discardableResult func retrieveInteritemSpacing(_ retriever: SpacingRetriever) -> OwnerType
-  @discardableResult func retrieveSectionInsets(_ retriever: SectionInsetsRetriever) -> OwnerType
-  @discardableResult func retrieveSectionHeaderSize(_ retriever: ReusableViewSizeRetriever) -> OwnerType
-  @discardableResult func retrieveSectionFooterSize(_ retriever: ReusableViewSizeRetriever) -> OwnerType
-  
-  @discardableResult func onDidEndDragging(_ handler: DidEndDraggingHandler?) -> OwnerType
-  @discardableResult func onDidScroll(_ handler: CommonScrollHandler?) -> OwnerType
-  @discardableResult func onDidEndDecelerating(_ handler: CommonScrollHandler?) -> OwnerType
-}
-
 fileprivate struct AssociatedKey {
   static var proxy = "proxyKey"
 }
 
-public extension SequentialCollection where Self: UICollectionView {
+extension Papyrus where Type: CollectionView {
   
   public typealias NumberOfSectionsRetriever = (
     _ collectionView: UICollectionView) -> Int
@@ -114,8 +88,8 @@ public extension SequentialCollection where Self: UICollectionView {
   /// Associates collection's datasource calls with corresponding clossures or uses external dataSource, instead
   @discardableResult public func setDataSource(_ dataSource: CollectionDataSource) -> Self {
     switch dataSource {
-    case .embeded: self.dataSource = proxy
-    case .custom(let value): self.dataSource = value
+    case .embeded: instance.dataSource = proxy
+    case .custom(let value): instance.dataSource = value
     }
     return self
   }
@@ -123,8 +97,8 @@ public extension SequentialCollection where Self: UICollectionView {
   /// Associates collection's delegate calls with corresponding clossures or uses external delegate, instead
   @discardableResult public func setDelegate(_ delegate: CollectionDelegate) -> Self {
     switch delegate {
-    case .embeded: self.delegate = proxy
-    case .custom(let value): self.delegate = value
+    case .embeded: instance.delegate = proxy
+    case .custom(let value): instance.delegate = value
     }
     return self
   }
@@ -207,24 +181,24 @@ public extension SequentialCollection where Self: UICollectionView {
 
 /// Container of callbacks to configure different aspects of collection view
 public class CollectionViewHooksHolder {
-  fileprivate(set) lazy var numberOfSectionsRetriever: SequentialCollection.NumberOfSectionsRetriever = { _ in return 1 }
-  fileprivate(set) lazy var numberOfItemsRetriever: SequentialCollection.NumberOfItemsRetriever = { _ in return 1 }
-  fileprivate(set) lazy var cellRetriever: SequentialCollection.CellRetriever = { _ in return UICollectionViewCell() }
-  fileprivate(set) lazy var reusableViewRetriever: SequentialCollection.ReusableViewRetriever = { _ in return UICollectionReusableView() }
+  fileprivate(set) lazy var numberOfSectionsRetriever: Papyrus.NumberOfSectionsRetriever = { _ in return 1 }
+  fileprivate(set) lazy var numberOfItemsRetriever: Papyrus.NumberOfItemsRetriever = { _ in return 1 }
+  fileprivate(set) lazy var cellRetriever: Papyrus.CellRetriever = { _ in return UICollectionViewCell() }
+  fileprivate(set) lazy var reusableViewRetriever: Papyrus.ReusableViewRetriever = { _ in return UICollectionReusableView() }
   
-  fileprivate(set) lazy var didEndDisplayingCellHandler: SequentialCollection.DidEndDisplayingCellHandler = { _ in }
-  fileprivate(set) lazy var selectionHandler: SequentialCollection.SelectionHandler = { _ in }
+  fileprivate(set) lazy var didEndDisplayingCellHandler: Papyrus.DidEndDisplayingCellHandler = { _ in }
+  fileprivate(set) lazy var selectionHandler: Papyrus.SelectionHandler = { _ in }
   
-  fileprivate(set) lazy var itemSizeRetriever: SequentialCollection.ItemSizeRetriever = { (_, layout, _) in return layout.itemSize }
-  fileprivate(set) lazy var sectionInsetsRetriever: SequentialCollection.SectionInsetsRetriever = { (_, layout, _) in return layout.sectionInset }
-  fileprivate(set) lazy var lineSpacingRetiever: SequentialCollection.SpacingRetriever = { (_, layout, _) in return layout.minimumLineSpacing }
-  fileprivate(set) lazy var interitemSpacingRetiever: SequentialCollection.SpacingRetriever = { (_, layout, _) in return layout.minimumInteritemSpacing }
-  fileprivate(set) lazy var sectionHeaderSizeRetriever: SequentialCollection.ReusableViewSizeRetriever = { (_, layout, _) in return layout.headerReferenceSize }
-  fileprivate(set) lazy var sectionFooterSizeRetriever: SequentialCollection.ReusableViewSizeRetriever = { (_, layout, _) in return layout.footerReferenceSize }
+  fileprivate(set) lazy var itemSizeRetriever: Papyrus.ItemSizeRetriever = { (_, layout, _) in return layout.itemSize }
+  fileprivate(set) lazy var sectionInsetsRetriever: Papyrus.SectionInsetsRetriever = { (_, layout, _) in return layout.sectionInset }
+  fileprivate(set) lazy var lineSpacingRetiever: Papyrus.SpacingRetriever = { (_, layout, _) in return layout.minimumLineSpacing }
+  fileprivate(set) lazy var interitemSpacingRetiever: Papyrus.SpacingRetriever = { (_, layout, _) in return layout.minimumInteritemSpacing }
+  fileprivate(set) lazy var sectionHeaderSizeRetriever: Papyrus.ReusableViewSizeRetriever = { (_, layout, _) in return layout.headerReferenceSize }
+  fileprivate(set) lazy var sectionFooterSizeRetriever: Papyrus.ReusableViewSizeRetriever = { (_, layout, _) in return layout.footerReferenceSize }
   
-  fileprivate(set) lazy var didEndDraggingHandler: SequentialCollection.DidEndDraggingHandler? = nil
-  fileprivate(set) lazy var didScrollHandler: SequentialCollection.CommonScrollHandler? = nil
-  fileprivate(set) lazy var didEndDeceleratingHandler: SequentialCollection.CommonScrollHandler? = nil
+  fileprivate(set) lazy var didEndDraggingHandler: Papyrus.DidEndDraggingHandler? = nil
+  fileprivate(set) lazy var didScrollHandler: Papyrus.CommonScrollHandler? = nil
+  fileprivate(set) lazy var didEndDeceleratingHandler: Papyrus.CommonScrollHandler? = nil
 }
 
 /// `Proxy` traps calls as `UICollectionViewDataSource`, `UICollectionViewDelegate` and `UIScrollViewDelegate` and

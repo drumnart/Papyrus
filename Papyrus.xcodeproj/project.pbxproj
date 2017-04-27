@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D824855D1EB1BB7400FD1548 /* Papyrus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D824855C1EB1BB7400FD1548 /* Papyrus.swift */; };
 		D84176991E8D6E1A000B0640 /* Papyrus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D841768F1E8D6E1A000B0640 /* Papyrus.framework */; };
 		D84176A01E8D6E1A000B0640 /* Papyrus.h in Headers */ = {isa = PBXBuildFile; fileRef = D84176921E8D6E1A000B0640 /* Papyrus.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D84176AA1E8D7563000B0640 /* SequentialCollection .swift in Sources */ = {isa = PBXBuildFile; fileRef = D84176A91E8D7563000B0640 /* SequentialCollection .swift */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D824855C1EB1BB7400FD1548 /* Papyrus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Papyrus.swift; sourceTree = "<group>"; };
 		D841768F1E8D6E1A000B0640 /* Papyrus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Papyrus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D84176921E8D6E1A000B0640 /* Papyrus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Papyrus.h; sourceTree = "<group>"; };
 		D84176931E8D6E1A000B0640 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				D84176B31E8DBF4D000B0640 /* UIRefreshControl+Extensions.swift */,
 				D8D737AA1E8EEDD600CBFE46 /* Reusable.swift */,
 				D8D737AC1E8EEE6600CBFE46 /* NibInstantiable.swift */,
+				D824855C1EB1BB7400FD1548 /* Papyrus.swift */,
 			);
 			path = Papyrus;
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 				D8D737AD1E8EEE6600CBFE46 /* NibInstantiable.swift in Sources */,
 				D84176B01E8D8A15000B0640 /* AssociatedObject.swift in Sources */,
 				D84176B41E8DBF4D000B0640 /* UIRefreshControl+Extensions.swift in Sources */,
+				D824855D1EB1BB7400FD1548 /* Papyrus.swift in Sources */,
 				D84176AA1E8D7563000B0640 /* SequentialCollection .swift in Sources */,
 				D84176AE1E8D8178000B0640 /* UICollectionView+Extensions.swift in Sources */,
 				D84176B21E8DA9C9000B0640 /* UIScrollView+Extensions.swift in Sources */,

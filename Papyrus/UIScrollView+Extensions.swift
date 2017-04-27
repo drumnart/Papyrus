@@ -6,7 +6,7 @@
 //  Copyright © 2017 ToBox. All rights reserved.
 //
 
-extension UIScrollView {
+extension Papyrus where Type: UIScrollView {
   
   public enum DecelerationRate {
     case normal
@@ -22,33 +22,33 @@ extension UIScrollView {
     }
   }
   
-  open func translation(in view: UIView? = nil) -> CGPoint {
-    return panGestureRecognizer.translation(in: view ?? self)
+  public func translation(in view: UIView? = nil) -> CGPoint {
+    return instance.panGestureRecognizer.translation(in: view ?? instance)
   }
   
-  @nonobjc @discardableResult open func setContentInset(_ contentInset: UIEdgeInsets) -> Self {
-    self.contentInset = contentInset
+  @nonobjc @discardableResult public func setContentInset(_ contentInset: UIEdgeInsets) -> Self {
+    instance.contentInset = contentInset
     return self
   }
   
-  @nonobjc @discardableResult open func shiftContent(by contentOffset: CGPoint, animated: Bool) -> Self {
-    self.setContentOffset(contentOffset, animated: animated)
+  @nonobjc @discardableResult public func shiftContent(by contentOffset: CGPoint, animated: Bool) -> Self {
+    instance.setContentOffset(contentOffset, animated: animated)
     return self
   }
   
-  @nonobjc @discardableResult open func scrollsToTop(_ boolValue: Bool) -> Self {
-    self.scrollsToTop = boolValue
+  @nonobjc @discardableResult public func scrollsToTop(_ boolValue: Bool) -> Self {
+    instance.scrollsToTop = boolValue
     return self
   }
   
-  @nonobjc @discardableResult open func setDecelerationRate(_ rate: DecelerationRate) -> Self {
-    self.decelerationRate = rate.rawValue
+  @nonobjc @discardableResult public func setDecelerationRate(_ rate: DecelerationRate) -> Self {
+    instance.decelerationRate = rate.rawValue
     return self
   }
 }
 
 /// UIScrollView + PullToRefresh
-extension UIScrollView {
+extension ScrollView {
   
   public typealias PullToRefreshCallback = (_ sender: UIRefreshControl) -> ()
   
