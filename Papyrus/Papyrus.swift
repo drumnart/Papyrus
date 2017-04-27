@@ -33,3 +33,6 @@ extension PapyrusCompatible {
 
 extension CollectionView: PapyrusCompatible {}
 extension Papyrus: ReusableItemsManager {}
+extension Papyrus: PullToRefreshable {
+  internal var refreshControlOwner: Base { return base }
+}

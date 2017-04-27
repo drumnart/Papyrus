@@ -26,7 +26,7 @@ extension Papyrus where BaseType: ScrollView {
     return self
   }
   
-  @discardableResult public func scrollsToTop(_ boolValue: Bool) -> Self {
+  @discardableResult public func setScrollsToTop(_ boolValue: Bool) -> Self {
     base.scrollsToTop = boolValue
     return self
   }

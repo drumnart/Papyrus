@@ -312,7 +312,7 @@ extension Papyrus where BaseType: CollectionView {
     return flowLayout?.itemSize ?? .zero
   }
   
-  @discardableResult func setBackgroundColor(_ bgColor: UIColor) -> Self {
+  @discardableResult public func setBackgroundColor(_ bgColor: UIColor) -> Self {
     base.backgroundColor = bgColor
     return self
   }
