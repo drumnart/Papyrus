@@ -52,7 +52,7 @@ extension CollectionView {
   }
   
   /// Returns `UICollectionViewFlowLayout` instance if default layout is used or nil, otherwise
-  var flowLayout: UICollectionViewFlowLayout? {
+  public var flowLayout: UICollectionViewFlowLayout? {
     return collectionViewLayout as? UICollectionViewFlowLayout
   }
 }

@@ -3,12 +3,12 @@
 //  Papyrus
 //
 //  Created by Sergey Gorin on 27.04.17.
-//  Copyright © 2017 ToBox. All rights reserved.
+//  Copyright © 2017 Drumnart. All rights reserved.
 //
 
 import Foundation
 
-protocol PullToRefreshable {
+public protocol PullToRefreshable {
   associatedtype RefreshControlOwner
   var refreshControlOwner: RefreshControlOwner { get }
 }
@@ -17,17 +17,17 @@ protocol PullToRefreshable {
 extension PullToRefreshable where RefreshControlOwner: ScrollView {
   
   /// Another name for `refreshControl`
-  var refreshView: UIRefreshControl? {
+  public var refreshView: UIRefreshControl? {
     return _refreshControl
   }
   
   /// Refresh Status
-  var isRefreshing: Bool {
+  public var isRefreshing: Bool {
     return _refreshControl?.isRefreshing ?? false
   }
   
   /// Can be used to add and cofigure custom refreshControl if needed.
-  @discardableResult func setupRefreshControl(_ closure: () -> UIRefreshControl) -> Self {
+  @discardableResult public func setupRefreshControl(_ closure: () -> UIRefreshControl) -> Self {
     let refreshControl = closure()
     refreshControl.addTarget(self, action: #selector(refreshControlOwner.pullToRefresh(_:)), for: .valueChanged)
     if #available(iOS 10.0, *) {
@@ -39,24 +39,24 @@ extension PullToRefreshable where RefreshControlOwner: ScrollView {
   }
   
   /// Used to add and cofigure refreshControl (just another way using @autoclosure).
-  @discardableResult func addRefreshControl(_ closure: @autoclosure () -> UIRefreshControl) -> Self {
+  @discardableResult public func addRefreshControl(_ closure: @autoclosure () -> UIRefreshControl) -> Self {
     return setupRefreshControl(closure)
   }
   
   /// Used for handling PullToRefresh action. Creates instance of UIRefreshControl if it doesn't already exist.
-  @discardableResult mutating func onPullToRefresh(_ closure: @escaping ScrollView.PullToRefreshCallback) -> Self {
+  @discardableResult public func onPullToRefresh(_ closure: @escaping ScrollView.PullToRefreshCallback) -> Self {
     if _refreshControl == nil { addRefreshControl(UIRefreshControl()) }
     refreshControlOwner.pullToRefreshCallback = closure
     return self
   }
   
   /// Starts animating `refreshControl`
-  func beginRefreshing() {
+  public func beginRefreshing() {
     _refreshControl?.beginRefreshing()
   }
   
   /// Stops animating `refreshControl`
-  func endRefreshing() {
+  public func endRefreshing() {
     _refreshControl?.endRefreshing()
   }
   
@@ -71,7 +71,7 @@ extension PullToRefreshable where RefreshControlOwner: ScrollView {
 
 extension ScrollView: PullToRefreshable {
   
-  var refreshControlOwner: ScrollView { return self }
+  public var refreshControlOwner: ScrollView { return self }
   
   fileprivate struct AssociatedKey {
     static var pullToRefresh = "pullToRefreshKey"

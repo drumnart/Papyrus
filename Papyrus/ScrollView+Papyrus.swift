@@ -3,7 +3,7 @@
 //  Papyrus
 //
 //  Created by Sergey Gorin on 27.04.17.
-//  Copyright © 2017 ToBox. All rights reserved.
+//  Copyright © 2017 Drumnart. All rights reserved.
 //
 
 import Foundation

@@ -306,22 +306,22 @@ extension Papyrus where BaseType: CollectionView {
 /// Next group of methods have effect only if layout is `UICollectionViewFlowLayout`
 extension Papyrus where BaseType: CollectionView {
   
-  @discardableResult func setScrollDirection(_ direction: UICollectionViewScrollDirection) -> Self {
+  @discardableResult public func setScrollDirection(_ direction: UICollectionViewScrollDirection) -> Self {
     base.flowLayout?.scrollDirection = direction
     return self
   }
   
-  @discardableResult func setItemSize(_ itemSize: CGSize) -> Self {
+  @discardableResult public func setItemSize(_ itemSize: CGSize) -> Self {
     base.flowLayout?.itemSize = itemSize
     return self
   }
   
-  @discardableResult func setMinInteritemSpacing(_ spacing: CGFloat) -> Self {
+  @discardableResult public func setMinInteritemSpacing(_ spacing: CGFloat) -> Self {
     base.flowLayout?.minimumInteritemSpacing = spacing
     return self
   }
   
-  @discardableResult func setMinLineSpacing(_ spacing: CGFloat) -> Self {
+  @discardableResult public func setMinLineSpacing(_ spacing: CGFloat) -> Self {
     base.flowLayout?.minimumLineSpacing = spacing
     return self
   }

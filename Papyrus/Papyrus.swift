@@ -34,5 +34,5 @@ extension PapyrusCompatible {
 extension CollectionView: PapyrusCompatible {}
 extension Papyrus: ReusableItemsManager {}
 extension Papyrus: PullToRefreshable {
-  var refreshControlOwner: Base { return base }
+  public var refreshControlOwner: BaseType { return base }
 }
