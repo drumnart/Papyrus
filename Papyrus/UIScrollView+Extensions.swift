@@ -1,12 +1,13 @@
 //
-//  UIScrollView+Extensions.swift
+//  UIScrollView+Papyrus.swift
 //  Papyrus
 //
-//  Created by Sergey Gorin on 31.03.17.
-//  Copyright © 2017 ToBox. All rights reserved.
+//  Created by Sergey Gorin on 27.04.17.
+//  Copyright © 2017 Drumnart. All rights reserved.
 //
 
-extension Papyrus where Type: UIScrollView {
+// MARK: - `UIScrollView` + Common extensions
+extension ScrollView {
   
   public enum DecelerationRate {
     case normal
@@ -23,31 +24,11 @@ extension Papyrus where Type: UIScrollView {
   }
   
   public func translation(in view: UIView? = nil) -> CGPoint {
-    return instance.panGestureRecognizer.translation(in: view ?? instance)
-  }
-  
-  @nonobjc @discardableResult public func setContentInset(_ contentInset: UIEdgeInsets) -> Self {
-    instance.contentInset = contentInset
-    return self
-  }
-  
-  @nonobjc @discardableResult public func shiftContent(by contentOffset: CGPoint, animated: Bool) -> Self {
-    instance.setContentOffset(contentOffset, animated: animated)
-    return self
-  }
-  
-  @nonobjc @discardableResult public func scrollsToTop(_ boolValue: Bool) -> Self {
-    instance.scrollsToTop = boolValue
-    return self
-  }
-  
-  @nonobjc @discardableResult public func setDecelerationRate(_ rate: DecelerationRate) -> Self {
-    instance.decelerationRate = rate.rawValue
-    return self
+    return panGestureRecognizer.translation(in: view ?? self)
   }
 }
 
-/// UIScrollView + PullToRefresh
+// MARK: - `UIScrollView` + PullToRefresh
 extension ScrollView {
   
   public typealias PullToRefreshCallback = (_ sender: UIRefreshControl) -> ()

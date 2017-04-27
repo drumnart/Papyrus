@@ -3,54 +3,10 @@
 //  Papyrus
 //
 //  Created by Sergey Gorin on 30.03.17.
-//  Copyright © 2017 ToBox. All rights reserved.
+//  Copyright © 2017 Drumnart. All rights reserved.
 //
 
 // MARK: - Common `UICollectionView` extensions
-
-extension Papyrus where Type: CollectionView {
-  public var flowLayout: UICollectionViewFlowLayout? {
-    return instance.collectionViewLayout as? UICollectionViewFlowLayout
-  }
-  
-  public var scrollDirection: UICollectionViewScrollDirection {
-    get {
-      return flowLayout?.scrollDirection ?? .vertical
-    }
-    set {
-      flowLayout?.scrollDirection = newValue
-    }
-  }
-  
-  public var interItemSpacing: CGFloat {
-    return flowLayout?.minimumInteritemSpacing ?? 0
-  }
-  
-  public var itemSize: CGSize {
-    return flowLayout?.itemSize ?? .zero
-  }
-  
-  @nonobjc @discardableResult public func setBackgroundView(_ backgroundView: UIView?) -> Self {
-    instance.backgroundView = backgroundView
-    return self
-  }
-  
-  @nonobjc @discardableResult public func setScrollDirection(_ direction: UICollectionViewScrollDirection) -> Self {
-    flowLayout?.scrollDirection = direction
-    return self
-  }
-  
-  @discardableResult public func setItemSize(_ itemSize: CGSize) -> Self {
-    flowLayout?.itemSize = itemSize
-    return self
-  }
-  
-  @discardableResult public func setInteritemSpacing(_ spacing: CGFloat) -> Self {
-    flowLayout?.minimumInteritemSpacing = spacing
-    return self
-  }
-}
-
 extension CollectionView {
   
   public enum SectionElementKind {
@@ -96,6 +52,7 @@ extension CollectionView {
   }
 }
 
+/// Option Set of keys of section parts
 public struct SectionElementKindSet: OptionSet {
   public init(rawValue: UInt) {
     self.rawValue = rawValue

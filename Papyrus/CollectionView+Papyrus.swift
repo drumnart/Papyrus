@@ -3,7 +3,7 @@
 //  Papyrus
 //
 //  Created by Sergey Gorin on 30.03.17.
-//  Copyright © 2017 ToBox. All rights reserved.
+//  Copyright © 2017 Drumnart. All rights reserved.
 //
 
 public enum CollectionDataSource {
@@ -20,7 +20,7 @@ fileprivate struct AssociatedKey {
   static var proxy = "proxyKey"
 }
 
-extension Papyrus where Type: CollectionView {
+extension Papyrus where BaseType: CollectionView {
   
   public typealias NumberOfSectionsRetriever = (
     _ collectionView: UICollectionView) -> Int
@@ -35,7 +35,7 @@ extension Papyrus where Type: CollectionView {
   
   public typealias ReusableViewRetriever = (
     _ collectionView: UICollectionView,
-    _ kind: Type.SectionElementKind,
+    _ kind: BaseType.SectionElementKind,
     _ indexPath: IndexPath) -> UICollectionReusableView
   
   public typealias DidEndDisplayingCellHandler = (
@@ -88,8 +88,8 @@ extension Papyrus where Type: CollectionView {
   /// Associates collection's datasource calls with corresponding clossures or uses external dataSource, instead
   @discardableResult public func setDataSource(_ dataSource: CollectionDataSource) -> Self {
     switch dataSource {
-    case .embeded: instance.dataSource = proxy
-    case .custom(let value): instance.dataSource = value
+    case .embeded: base.dataSource = proxy
+    case .custom(let value): base.dataSource = value
     }
     return self
   }
@@ -97,8 +97,8 @@ extension Papyrus where Type: CollectionView {
   /// Associates collection's delegate calls with corresponding clossures or uses external delegate, instead
   @discardableResult public func setDelegate(_ delegate: CollectionDelegate) -> Self {
     switch delegate {
-    case .embeded: instance.delegate = proxy
-    case .custom(let value): instance.delegate = value
+    case .embeded: base.delegate = proxy
+    case .custom(let value): base.delegate = value
     }
     return self
   }
@@ -286,5 +286,54 @@ extension Proxy: UIScrollViewDelegate {
   
   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     hooksHolder.didEndDeceleratingHandler?(scrollView)
+  }
+}
+
+// MARK: - CollectionView + Helper methods
+extension Papyrus where BaseType: CollectionView {
+  public var flowLayout: UICollectionViewFlowLayout? {
+    return base.collectionViewLayout as? UICollectionViewFlowLayout
+  }
+  
+  public var scrollDirection: UICollectionViewScrollDirection {
+    get {
+      return flowLayout?.scrollDirection ?? .vertical
+    }
+    set {
+      flowLayout?.scrollDirection = newValue
+    }
+  }
+  
+  public var interItemSpacing: CGFloat {
+    return flowLayout?.minimumInteritemSpacing ?? 0
+  }
+  
+  public var itemSize: CGSize {
+    return flowLayout?.itemSize ?? .zero
+  }
+  
+  @discardableResult func setBackgroundColor(_ bgColor: UIColor) -> Self {
+    base.backgroundColor = bgColor
+    return self
+  }
+  
+  @discardableResult public func setBackgroundView(_ backgroundView: UIView?) -> Self {
+    base.backgroundView = backgroundView
+    return self
+  }
+  
+  @discardableResult public func setScrollDirection(_ direction: UICollectionViewScrollDirection) -> Self {
+    flowLayout?.scrollDirection = direction
+    return self
+  }
+  
+  @discardableResult public func setItemSize(_ itemSize: CGSize) -> Self {
+    flowLayout?.itemSize = itemSize
+    return self
+  }
+  
+  @discardableResult public func setInteritemSpacing(_ spacing: CGFloat) -> Self {
+    flowLayout?.minimumInteritemSpacing = spacing
+    return self
   }
 }
