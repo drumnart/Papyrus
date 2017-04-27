@@ -71,7 +71,7 @@ extension PullToRefreshable where RefreshControlOwner: ScrollView {
 
 extension ScrollView: PullToRefreshable {
   
-  internal var refreshControlOwner: ScrollView { return self }
+  var refreshControlOwner: ScrollView { return self }
   
   fileprivate struct AssociatedKey {
     static var pullToRefresh = "pullToRefreshKey"
