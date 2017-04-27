@@ -62,3 +62,34 @@ public struct SectionElementKindSet: OptionSet {
   static let header = SectionElementKindSet(rawValue: 1)
   static let footer = SectionElementKindSet(rawValue: 2)
 }
+
+// MARK: - Helpers
+
+/// Next group of methods have effect only if layout is `UICollectionViewFlowLayout`
+extension CollectionView {
+  
+  /// Returns `UICollectionViewFlowLayout` instance if default layout is used or nil, otherwise
+  var flowLayout: UICollectionViewFlowLayout? {
+    return collectionViewLayout as? UICollectionViewFlowLayout
+  }
+  
+  @discardableResult func setScrollDirection(_ direction: UICollectionViewScrollDirection) -> Self {
+    flowLayout?.scrollDirection = direction
+    return self
+  }
+  
+  @discardableResult func setItemSize(_ itemSize: CGSize) -> Self {
+    flowLayout?.itemSize = itemSize
+    return self
+  }
+  
+  @discardableResult func setMinInteritemSpacing(_ spacing: CGFloat) -> Self {
+    flowLayout?.minimumInteritemSpacing = spacing
+    return self
+  }
+  
+  @discardableResult func setMinLineSpacing(_ spacing: CGFloat) -> Self {
+    flowLayout?.minimumLineSpacing = spacing
+    return self
+  }
+}

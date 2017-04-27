@@ -291,26 +291,6 @@ extension Proxy: UIScrollViewDelegate {
 
 // MARK: - CollectionView + Helper methods
 extension Papyrus where BaseType: CollectionView {
-  public var flowLayout: UICollectionViewFlowLayout? {
-    return base.collectionViewLayout as? UICollectionViewFlowLayout
-  }
-  
-  public var scrollDirection: UICollectionViewScrollDirection {
-    get {
-      return flowLayout?.scrollDirection ?? .vertical
-    }
-    set {
-      flowLayout?.scrollDirection = newValue
-    }
-  }
-  
-  public var interItemSpacing: CGFloat {
-    return flowLayout?.minimumInteritemSpacing ?? 0
-  }
-  
-  public var itemSize: CGSize {
-    return flowLayout?.itemSize ?? .zero
-  }
   
   @discardableResult public func setBackgroundColor(_ bgColor: UIColor) -> Self {
     base.backgroundColor = bgColor
@@ -319,21 +299,6 @@ extension Papyrus where BaseType: CollectionView {
   
   @discardableResult public func setBackgroundView(_ backgroundView: UIView?) -> Self {
     base.backgroundView = backgroundView
-    return self
-  }
-  
-  @discardableResult public func setScrollDirection(_ direction: UICollectionViewScrollDirection) -> Self {
-    flowLayout?.scrollDirection = direction
-    return self
-  }
-  
-  @discardableResult public func setItemSize(_ itemSize: CGSize) -> Self {
-    flowLayout?.itemSize = itemSize
-    return self
-  }
-  
-  @discardableResult public func setInteritemSpacing(_ spacing: CGFloat) -> Self {
-    flowLayout?.minimumInteritemSpacing = spacing
     return self
   }
 }
