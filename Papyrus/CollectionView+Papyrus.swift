@@ -292,6 +292,11 @@ extension Proxy: UIScrollViewDelegate {
 // MARK: - CollectionView + Helper methods
 extension Papyrus where BaseType: CollectionView {
   
+  @discardableResult public func reloadData() -> Self {
+    base.reloadData()
+    return self
+  }
+  
   @discardableResult public func setBackgroundColor(_ bgColor: UIColor) -> Self {
     base.backgroundColor = bgColor
     return self
