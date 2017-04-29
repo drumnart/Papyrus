@@ -14,15 +14,15 @@ public typealias ScrollView = UIScrollView
 
 public final class Papyrus<BaseType> {
   public let base: BaseType
-  public init( _ instance: BaseType) {
-    self.base = instance
+  public init( _ base: BaseType) {
+    self.base = base
   }
 }
 
-// To use `pap` as namespace
+// To extend types by Papyrus
 public protocol PapyrusCompatible {
   associatedtype CompatibleType
-  var pap: CompatibleType { get }
+  var pap: CompatibleType { get } // `pap` used as namespace
 }
 
 extension PapyrusCompatible {
@@ -32,7 +32,10 @@ extension PapyrusCompatible {
 }
 
 extension CollectionView: PapyrusCompatible {}
-extension Papyrus: ReusableItemsManager {}
+
+extension Papyrus: ReusableItemsManager {
+  public var listView: BaseType { return base }
+}
 extension Papyrus: PullToRefreshable {
   public var refreshControlOwner: BaseType { return base }
 }
