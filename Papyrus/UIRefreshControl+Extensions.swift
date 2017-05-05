@@ -8,12 +8,12 @@
 
 extension UIRefreshControl {
   
-  public func withTintColor(_ tintColor: UIColor) -> Self {
+  open func withTintColor(_ tintColor: UIColor) -> Self {
     self.tintColor = tintColor
     return self
   }
   
-  public func withAttributedTitle(_ attributedTitle: NSAttributedString) -> Self {
+  open func withAttributedTitle(_ attributedTitle: NSAttributedString) -> Self {
     self.attributedTitle = attributedTitle
     return self
   }

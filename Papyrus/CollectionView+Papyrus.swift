@@ -204,7 +204,7 @@ public class CollectionViewHooksHolder {
 /// `Proxy` traps calls as `UICollectionViewDataSource`, `UICollectionViewDelegate` and `UIScrollViewDelegate` and
 /// interconnects them with callbacks retained by instance of `CollectionViewHooksHolder`.
 fileprivate class Proxy: NSObject {
-  fileprivate var hooksHolder: CollectionViewHooksHolder
+  fileprivate let hooksHolder: CollectionViewHooksHolder
   
   init(_ hooksHolder: CollectionViewHooksHolder) {
     self.hooksHolder = hooksHolder
@@ -294,11 +294,6 @@ extension Papyrus where BaseType: CollectionView {
   
   @discardableResult public func reloadData() -> Self {
     base.reloadData()
-    return self
-  }
-  
-  @discardableResult public func setBackgroundColor(_ bgColor: UIColor) -> Self {
-    base.backgroundColor = bgColor
     return self
   }
   

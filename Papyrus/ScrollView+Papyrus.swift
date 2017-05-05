@@ -50,4 +50,9 @@ extension Papyrus where BaseType: ScrollView {
     base.decelerationRate = rate.rawValue
     return self
   }
+  
+  @discardableResult public func setBackgroundColor(_ bgColor: UIColor) -> Self {
+    base.backgroundColor = bgColor
+    return self
+  }
 }

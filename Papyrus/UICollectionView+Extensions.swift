@@ -35,7 +35,7 @@ extension CollectionView {
   }
   
   /// Freeze collection view sections' header / footer to visible bounds where layout is UICollectionViewFlowLayout
-  @discardableResult func sectionElements(_ kinds: SectionElementKindSet, shouldPinToVisibleBounds value: Bool) -> Self {
+  @discardableResult open func sectionElements(_ kinds: SectionElementKindSet, shouldPinToVisibleBounds value: Bool) -> Self {
     guard let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout else {
       print("Couldn't pin header/footer to visible bounds because current layout is not of type UICollectionViewFlowLayout.")
       return self
@@ -50,10 +50,29 @@ extension CollectionView {
     }
     return self
   }
+}
+
+// MARK: - If 'UICollectionViewFlowLayout' layout is used
+extension CollectionView {
   
-  /// Returns `UICollectionViewFlowLayout` instance if default layout is used or nil, otherwise
+  /// Returns `UICollectionViewFlowLayout` instance if default collectionViewLayout is used or nil, otherwise
   public var flowLayout: UICollectionViewFlowLayout? {
     return collectionViewLayout as? UICollectionViewFlowLayout
+  }
+  
+  @discardableResult open func setScrollDirection(_ direction: UICollectionViewScrollDirection) -> Self {
+    flowLayout?.scrollDirection = direction
+    return self
+  }
+  
+  @discardableResult open func setItemSize(_ itemSize: CGSize) -> Self {
+    flowLayout?.itemSize = itemSize
+    return self
+  }
+  
+  @discardableResult open func setInteritemSpacing(_ spacing: CGFloat) -> Self {
+    flowLayout?.minimumInteritemSpacing = spacing
+    return self
   }
 }
 

@@ -14,7 +14,7 @@ public typealias ScrollView = UIScrollView
 
 public final class Papyrus<BaseType> {
   public let base: BaseType
-  public init( _ base: BaseType) {
+  public init(_ base: BaseType) {
     self.base = base
   }
 }
@@ -25,7 +25,7 @@ public protocol PapyrusCompatible {
   var pap: CompatibleType { get } // `pap` used as namespace
 }
 
-extension PapyrusCompatible {
+public extension PapyrusCompatible {
   public var pap: Papyrus<Self> {
     return Papyrus(self)
   }
