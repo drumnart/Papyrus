@@ -76,9 +76,9 @@ extension Papyrus where BaseType: CollectionView {
   
   fileprivate var proxy: Proxy {
     get {
-      return AObj.get(self, key: &AssociatedKey.proxy) { return Proxy(CollectionViewHooksHolder()) }
+      return AObj.get(base, key: &AssociatedKey.proxy) { return Proxy(CollectionViewHooksHolder()) }
     }
-    set { AObj.set(self, key: &AssociatedKey.proxy, value: newValue) }
+    set { AObj.set(base, key: &AssociatedKey.proxy, value: newValue) }
   }
   
   public var hooksHolder: CollectionViewHooksHolder {
