@@ -31,7 +31,15 @@ public extension PapyrusCompatible {
   }
 }
 
-extension CollectionView: PapyrusCompatible {}
+// Make `UICollectionView` compatible to Papyrus
+extension CollectionView: PapyrusCompatible {
+  // Papyrus instance with default (embeded) datasource and delegate
+  public var pap: Papyrus<CollectionView> {
+    return Papyrus(self)
+      .setDataSource(.embeded)
+      .setDelegate(.embeded)
+  }
+}
 
 extension Papyrus: ReusableItemsManager {
   public var listView: BaseType { return base }
