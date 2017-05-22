@@ -38,6 +38,11 @@ extension Papyrus where BaseType: CollectionView {
     _ kind: BaseType.SectionElementKind,
     _ indexPath: IndexPath) -> UICollectionReusableView
   
+  public typealias WillDisplayCellHandler = (
+    _ collectionView: UICollectionView,
+    _ cell: UICollectionViewCell,
+    _ indexPath: IndexPath) -> Void
+  
   public typealias DidEndDisplayingCellHandler = (
     _ collectionView: UICollectionView,
     _ cell: UICollectionViewCell,
@@ -123,6 +128,11 @@ extension Papyrus where BaseType: CollectionView {
     return self
   }
   
+  @discardableResult public func onWillDisplayCell(_ handler: @escaping WillDisplayCellHandler) -> Self {
+    hooksHolder.willDisplayCellHandler = handler
+    return self
+  }
+  
   @discardableResult public func onDidEndDisplayingCell(_ handler: @escaping DidEndDisplayingCellHandler) -> Self {
     hooksHolder.didEndDisplayingCellHandler = handler
     return self
@@ -163,6 +173,11 @@ extension Papyrus where BaseType: CollectionView {
     return self
   }
   
+  @discardableResult public func onWillBeginDragging(_ handler: CommonScrollHandler?) -> Self {
+    hooksHolder.willBeginDraggingHandler = handler
+    return self
+  }
+  
   @discardableResult public func onDidEndDragging(_ handler: DidEndDraggingHandler?) -> Self {
     hooksHolder.didEndDraggingHandler = handler
     return self
@@ -186,6 +201,7 @@ public class CollectionViewHooksHolder {
   fileprivate(set) lazy var cellRetriever: Papyrus.CellRetriever = { _ in return UICollectionViewCell() }
   fileprivate(set) lazy var reusableViewRetriever: Papyrus.ReusableViewRetriever = { _ in return UICollectionReusableView() }
   
+  fileprivate(set) lazy var willDisplayCellHandler: Papyrus.WillDisplayCellHandler = { _ in }
   fileprivate(set) lazy var didEndDisplayingCellHandler: Papyrus.DidEndDisplayingCellHandler = { _ in }
   fileprivate(set) lazy var selectionHandler: Papyrus.SelectionHandler = { _ in }
   
@@ -196,6 +212,7 @@ public class CollectionViewHooksHolder {
   fileprivate(set) lazy var sectionHeaderSizeRetriever: Papyrus.ReusableViewSizeRetriever = { (_, layout, _) in return layout.headerReferenceSize }
   fileprivate(set) lazy var sectionFooterSizeRetriever: Papyrus.ReusableViewSizeRetriever = { (_, layout, _) in return layout.footerReferenceSize }
   
+  fileprivate(set) lazy var willBeginDraggingHandler: Papyrus.CommonScrollHandler? = nil
   fileprivate(set) lazy var didEndDraggingHandler: Papyrus.DidEndDraggingHandler? = nil
   fileprivate(set) lazy var didScrollHandler: Papyrus.CommonScrollHandler? = nil
   fileprivate(set) lazy var didEndDeceleratingHandler: Papyrus.CommonScrollHandler? = nil
@@ -232,6 +249,10 @@ extension Proxy: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegateFlowLayout
 extension Proxy: UICollectionViewDelegateFlowLayout {
+  
+  func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    hooksHolder.willDisplayCellHandler(collectionView, cell, indexPath)
+  }
   
   func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
     hooksHolder.didEndDisplayingCellHandler(collectionView, cell, indexPath)
@@ -275,6 +296,10 @@ extension Proxy: UICollectionViewDelegateFlowLayout {
 
 // MARK: - UIScrollViewDelegate
 extension Proxy: UIScrollViewDelegate {
+  
+  func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    hooksHolder.willBeginDraggingHandler?(scrollView)
+  }
   
   func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
     hooksHolder.didEndDraggingHandler?(scrollView, decelerate)
