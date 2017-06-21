@@ -70,8 +70,24 @@ extension CollectionView {
     return self
   }
   
+  @discardableResult open func setEstimatedItemSize(_ estimatedItemSize: CGSize) -> Self {
+    flowLayout?.estimatedItemSize = estimatedItemSize
+    return self
+  }
+
+  
   @discardableResult open func setInteritemSpacing(_ spacing: CGFloat) -> Self {
     flowLayout?.minimumInteritemSpacing = spacing
+    return self
+  }
+  
+  @discardableResult open func setHeaderReferenceSize(_ size: CGSize) -> Self {
+    flowLayout?.headerReferenceSize = size
+    return self
+  }
+  
+  @discardableResult open func setFooterReferenceSize(_ size: CGSize) -> Self {
+    flowLayout?.footerReferenceSize = size
     return self
   }
 }

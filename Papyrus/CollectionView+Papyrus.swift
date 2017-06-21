@@ -341,6 +341,11 @@ extension Papyrus where BaseType: CollectionView {
     return self
   }
   
+  @discardableResult public func setEstimatedItemSize(_ estimatedItemSize: CGSize) -> Self {
+    base.flowLayout?.estimatedItemSize = estimatedItemSize
+    return self
+  }
+  
   @discardableResult public func setMinInteritemSpacing(_ spacing: CGFloat) -> Self {
     base.flowLayout?.minimumInteritemSpacing = spacing
     return self
@@ -348,6 +353,16 @@ extension Papyrus where BaseType: CollectionView {
   
   @discardableResult public func setMinLineSpacing(_ spacing: CGFloat) -> Self {
     base.flowLayout?.minimumLineSpacing = spacing
+    return self
+  }
+  
+  @discardableResult public func setHeaderReferenceSize(_ size: CGSize) -> Self {
+    base.flowLayout?.headerReferenceSize = size
+    return self
+  }
+  
+  @discardableResult public func setFooterReferenceSize(_ size: CGSize) -> Self {
+    base.flowLayout?.footerReferenceSize = size
     return self
   }
 }
