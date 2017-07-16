@@ -75,6 +75,11 @@ extension Papyrus where BaseType: CollectionView {
   public typealias CommonScrollHandler = (
     _ scrollView: UIScrollView) -> Void
   
+  public typealias WillEndDraggingHandler = (
+    _ scrollView: UIScrollView,
+    _ velocity: CGPoint,
+    _ targetContentOffset: UnsafeMutablePointer<CGPoint>) -> Void
+  
   public typealias DidEndDraggingHandler = (
     _ scrollView: UIScrollView,
     _ decelerate: Bool) -> Void
@@ -173,6 +178,11 @@ extension Papyrus where BaseType: CollectionView {
     return self
   }
   
+  @discardableResult public func onWillEndDragging(_ handler: WillEndDraggingHandler?) -> Self {
+    hooksHolder.willEndDraggingHandler = handler
+    return self
+  }
+  
   @discardableResult public func onWillBeginDragging(_ handler: CommonScrollHandler?) -> Self {
     hooksHolder.willBeginDraggingHandler = handler
     return self
@@ -213,6 +223,7 @@ public class CollectionViewHooksHolder {
   fileprivate(set) lazy var sectionFooterSizeRetriever: Papyrus.ReusableViewSizeRetriever = { (_, layout, _) in return layout.footerReferenceSize }
   
   fileprivate(set) lazy var willBeginDraggingHandler: Papyrus.CommonScrollHandler? = nil
+  fileprivate(set) lazy var willEndDraggingHandler: Papyrus.WillEndDraggingHandler? = nil
   fileprivate(set) lazy var didEndDraggingHandler: Papyrus.DidEndDraggingHandler? = nil
   fileprivate(set) lazy var didScrollHandler: Papyrus.CommonScrollHandler? = nil
   fileprivate(set) lazy var didEndDeceleratingHandler: Papyrus.CommonScrollHandler? = nil
@@ -299,6 +310,11 @@ extension Proxy: UIScrollViewDelegate {
   
   func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
     hooksHolder.willBeginDraggingHandler?(scrollView)
+  }
+  
+  func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint,
+                                 targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    hooksHolder.willEndDraggingHandler?(scrollView, velocity, targetContentOffset)
   }
   
   func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
