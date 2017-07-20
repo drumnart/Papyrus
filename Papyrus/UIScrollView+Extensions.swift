@@ -27,6 +27,10 @@ extension ScrollView {
     return panGestureRecognizer.translation(in: view ?? self)
   }
   
+  public func velocity(in view: UIView? = nil) -> CGPoint {
+    return panGestureRecognizer.velocity(in: view ?? self)
+  }
+  
   @discardableResult open func set(contentInset: UIEdgeInsets) -> Self {
     self.contentInset = contentInset
     return self
