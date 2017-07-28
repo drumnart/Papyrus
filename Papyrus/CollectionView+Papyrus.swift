@@ -202,6 +202,11 @@ extension Papyrus where BaseType: CollectionView {
     hooksHolder.didEndDeceleratingHandler = handler
     return self
   }
+  
+  @discardableResult public func onDidEndScrollingAnimation(_ handler: CommonScrollHandler?) -> Self {
+    hooksHolder.didEndScrollingAnimationHandler = handler
+    return self
+  }
 }
 
 /// Container of callbacks to configure different aspects of collection view
@@ -227,6 +232,7 @@ public class CollectionViewHooksHolder {
   fileprivate(set) lazy var didEndDraggingHandler: Papyrus.DidEndDraggingHandler? = nil
   fileprivate(set) lazy var didScrollHandler: Papyrus.CommonScrollHandler? = nil
   fileprivate(set) lazy var didEndDeceleratingHandler: Papyrus.CommonScrollHandler? = nil
+  fileprivate(set) lazy var didEndScrollingAnimationHandler: Papyrus.CommonScrollHandler? = nil
 }
 
 /// `Proxy` traps calls as `UICollectionViewDataSource`, `UICollectionViewDelegate` and `UIScrollViewDelegate` and
@@ -327,6 +333,10 @@ extension Proxy: UIScrollViewDelegate {
   
   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     hooksHolder.didEndDeceleratingHandler?(scrollView)
+  }
+  
+  func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+    hooksHolder.didEndScrollingAnimationHandler?(scrollView)
   }
 }
 
