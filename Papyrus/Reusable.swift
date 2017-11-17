@@ -49,7 +49,7 @@ extension ReusableItemsManager where ListView: CollectionView {
   /// Register class-based UICollectioniewCell
   /// Example: collectionView.register(CustomCollectionViewCell.self)
   @discardableResult public func register<T: UICollectionViewCell>(_: T.Type,
-                                          withReuseId reuseId: ReuseId? = nil) -> Self where T: Reusable {
+                                          withReuseId reuseId: ReuseId? = nil) -> Self {
     listView.register(T.self, forCellWithReuseIdentifier: reuseId?.rawValue ?? T.reuseIdentifier)
     return self
   }
@@ -66,7 +66,7 @@ extension ReusableItemsManager where ListView: CollectionView {
   /// - Parameters: types - array of cells' classes
   /// - Returns: UICollectionView.self
   /// - Example: collectionView.register([CustomCollectionViewCell.self])
-  @discardableResult public func register<T: UICollectionViewCell>(_ types: [T.Type]) -> Self where T: Reusable {
+  @discardableResult public func register<T: UICollectionViewCell>(_ types: [T.Type]) -> Self {
     types.forEach {
       if let cellClass = $0 as? NibReusable.Type {
         listView.register(cellClass.nib, forCellWithReuseIdentifier: $0.reuseIdentifier)
@@ -81,7 +81,7 @@ extension ReusableItemsManager where ListView: CollectionView {
   /// Example: let cell: CustomCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
   public func dequeueCell<T: UICollectionViewCell>(_: T.Type = T.self,
                           withReuseId reuseId: ReuseId? = nil,
-                          for indexPath: IndexPath) -> T where T: Reusable {
+                          for indexPath: IndexPath) -> T {
     let reuseId = reuseId?.rawValue ?? T.reuseIdentifier
     guard let cell = listView.dequeueReusableCell(withReuseIdentifier: reuseId, for: indexPath) as? T else {
       fatalError("Failed to dequeue cell with reuse identifier \(reuseId). Verify id in XIB/Storyboard.")
@@ -92,7 +92,7 @@ extension ReusableItemsManager where ListView: CollectionView {
   /// Register class-based UICollectionReusableView
   @discardableResult public func register<T: UICollectionReusableView>(_: T.Type,
                                           kind: String,
-                                          withReuseId reuseId: ReuseId? = nil) -> Self where T: Reusable {
+                                          withReuseId reuseId: ReuseId? = nil) -> Self {
     listView.register(T.self, forSupplementaryViewOfKind: kind,
                       withReuseIdentifier: reuseId?.rawValue ?? T.reuseIdentifier)
     return self
@@ -108,8 +108,7 @@ extension ReusableItemsManager where ListView: CollectionView {
   }
   
   /// Register a bunch of nib-based and/or class-based reusable views subclassed from UICollectionReusableView
-  @discardableResult public func register<T: UICollectionReusableView>(_ types: [T.Type], kind: String) -> Self
-    where T: Reusable {
+  @discardableResult public func register<T: UICollectionReusableView>(_ types: [T.Type], kind: String) -> Self {
       types.forEach {
         if let cellClass = $0 as? NibReusable.Type {
           listView.register(cellClass.nib, forSupplementaryViewOfKind: kind, withReuseIdentifier: $0.reuseIdentifier)
@@ -124,7 +123,7 @@ extension ReusableItemsManager where ListView: CollectionView {
   public func dequeueView<T: UICollectionReusableView>(_: T.Type = T.self,
                           ofKind kind: String,
                           withReuseId reuseId: ReuseId? = nil,
-                          for indexPath: IndexPath) -> T where T: Reusable {
+                          for indexPath: IndexPath) -> T {
     let reuseId = reuseId?.rawValue ?? T.reuseIdentifier
     guard let cell = listView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reuseId,
                                                                for: indexPath) as? T
@@ -150,7 +149,7 @@ extension ReusableItemsManager where ListView: TableView {
   /// Register class-based UITableViewCell
   /// Example: tableView.registerCell(CustomTableViewCell)
   @discardableResult public func register<T: UITableViewCell>(_: T.Type,
-                                          withReuseId reuseId: ReuseId? = nil) -> Self where T: Reusable {
+                                          withReuseId reuseId: ReuseId? = nil) -> Self {
     listView.register(T.self, forCellReuseIdentifier: reuseId?.rawValue ?? T.reuseIdentifier)
     return self
   }
@@ -167,7 +166,7 @@ extension ReusableItemsManager where ListView: TableView {
   /// - Parameters: types - array of cells' classes
   /// - Returns: UITableViewView.self
   /// - Example: tableView.registerCells([CustomCollectionViewCell.self])
-  @discardableResult public func register<T: UITableViewCell>(_ types: [T.Type]) -> Self where T: Reusable {
+  @discardableResult public func register<T: UITableViewCell>(_ types: [T.Type]) -> Self {
     types.forEach {
       if let cellClass = $0 as? NibReusable.Type {
         listView.register(cellClass.nib, forCellReuseIdentifier: $0.reuseIdentifier)
@@ -182,7 +181,7 @@ extension ReusableItemsManager where ListView: TableView {
   /// Example: let cell: CustomTableViewCell = tableView.dequeueReusableCell(for: indexPath)
   public func dequeueCell<T: UITableViewCell>(_: T.Type = T.self,
                           withReuseId reuseId: ReuseId? = nil,
-                          for indexPath: IndexPath) -> T where T: Reusable {
+                          for indexPath: IndexPath) -> T {
     let reuseId = reuseId?.rawValue ?? T.reuseIdentifier
     guard let cell = listView.dequeueReusableCell(withIdentifier: reuseId, for: indexPath) as? T else {
       fatalError("Failed to dequeue cell with reuse identifier \(reuseId). Verify id in XIB/Storyboard.")
@@ -192,7 +191,7 @@ extension ReusableItemsManager where ListView: TableView {
   
   /// Register class-based UITableViewHeaderFooterView class
   @discardableResult public func register<T: UITableViewHeaderFooterView>(_: T.Type,
-                                          withReuseId reuseId: ReuseId? = nil) -> Self where T: Reusable {
+                                          withReuseId reuseId: ReuseId? = nil) -> Self {
     listView.register(T.self, forHeaderFooterViewReuseIdentifier: reuseId?.rawValue ?? T.reuseIdentifier)
     return self
   }
@@ -205,7 +204,7 @@ extension ReusableItemsManager where ListView: TableView {
   }
   
   /// Register a bunch of nib-based and/or class-based views subclassed from UITableViewHeaderFooterView
-  @discardableResult public func register<T: UITableViewHeaderFooterView>(_ types: [T.Type]) -> Self where T: Reusable {
+  @discardableResult public func register<T: UITableViewHeaderFooterView>(_ types: [T.Type]) -> Self {
     types.forEach {
       if let cellClass = $0 as? NibReusable.Type {
         listView.register(cellClass.nib, forHeaderFooterViewReuseIdentifier: $0.reuseIdentifier)
@@ -218,7 +217,7 @@ extension ReusableItemsManager where ListView: TableView {
   
   /// Dequeue custom UITableViewHeaderFooterView instance
   public func dequeueView<T: UITableViewHeaderFooterView>(_: T.Type = T.self,
-                          withReuseId reuseId: ReuseId? = nil) -> T? where T: Reusable {
+                          withReuseId reuseId: ReuseId? = nil) -> T? {
     let reuseId = reuseId?.rawValue ?? T.reuseIdentifier
     guard let cell = listView.dequeueReusableHeaderFooterView(withIdentifier: reuseId) as? T? else {
       fatalError("Failed to dequeue reusable view with reuse identifier \(reuseId). Verify id in XIB/Storyboard.")

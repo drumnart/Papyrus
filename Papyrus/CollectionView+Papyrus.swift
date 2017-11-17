@@ -212,13 +212,13 @@ extension Papyrus where BaseType: CollectionView {
 /// Container of callbacks to configure different aspects of collection view
 public class CollectionViewHooksHolder {
   fileprivate(set) lazy var numberOfSectionsRetriever: Papyrus.NumberOfSectionsRetriever = { _ in return 1 }
-  fileprivate(set) lazy var numberOfItemsRetriever: Papyrus.NumberOfItemsRetriever = { _ in return 1 }
-  fileprivate(set) lazy var cellRetriever: Papyrus.CellRetriever = { _ in return UICollectionViewCell() }
-  fileprivate(set) lazy var reusableViewRetriever: Papyrus.ReusableViewRetriever = { _ in return UICollectionReusableView() }
+  fileprivate(set) lazy var numberOfItemsRetriever: Papyrus.NumberOfItemsRetriever = { _,_  in return 1 }
+  fileprivate(set) lazy var cellRetriever: Papyrus.CellRetriever = { _,_  in return UICollectionViewCell() }
+  fileprivate(set) lazy var reusableViewRetriever: Papyrus.ReusableViewRetriever = { _,_,_  in return UICollectionReusableView() }
   
-  fileprivate(set) lazy var willDisplayCellHandler: Papyrus.WillDisplayCellHandler = { _ in }
-  fileprivate(set) lazy var didEndDisplayingCellHandler: Papyrus.DidEndDisplayingCellHandler = { _ in }
-  fileprivate(set) lazy var selectionHandler: Papyrus.SelectionHandler = { _ in }
+  fileprivate(set) lazy var willDisplayCellHandler: Papyrus.WillDisplayCellHandler = { _,_,_  in }
+  fileprivate(set) lazy var didEndDisplayingCellHandler: Papyrus.DidEndDisplayingCellHandler = { _,_,_  in }
+  fileprivate(set) lazy var selectionHandler: Papyrus.SelectionHandler = { _,_  in }
   
   fileprivate(set) lazy var itemSizeRetriever: Papyrus.ItemSizeRetriever = { (_, layout, _) in return layout.itemSize }
   fileprivate(set) lazy var sectionInsetsRetriever: Papyrus.SectionInsetsRetriever = { (_, layout, _) in return layout.sectionInset }
