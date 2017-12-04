@@ -99,6 +99,6 @@ public struct SectionElementKindSet: OptionSet {
   }
   public fileprivate(set) var rawValue: UInt
   
-  static let header = SectionElementKindSet(rawValue: 1)
-  static let footer = SectionElementKindSet(rawValue: 2)
+  public static let header = SectionElementKindSet(rawValue: 1)
+  public static let footer = SectionElementKindSet(rawValue: 2)
 }
