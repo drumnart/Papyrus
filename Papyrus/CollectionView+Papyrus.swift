@@ -357,7 +357,7 @@ extension Papyrus where BaseType: CollectionView {
 /// Next group of methods have effect only if layout is `UICollectionViewFlowLayout`
 extension Papyrus where BaseType: CollectionView {
   
-  @discardableResult public func setScrollDirection(_ direction: UICollectionViewScrollDirection) -> Self {
+  @discardableResult public func setScrollDirection(_ direction: UICollectionView.ScrollDirection) -> Self {
     base.flowLayout?.scrollDirection = direction
     return self
   }

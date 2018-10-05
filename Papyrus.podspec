@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
 
   s.name         = "Papyrus"
-  s.version      = "1.5.1"
+  s.version      = "1.6"
   s.summary      = "A tool to easily configure Collection Views in chained way."
   s.description  = <<-DESC
-    Papyrus is intended for configuring of Collection Views as a chain of simple settings. 
+    Papyrus is intended for more convinient configuring the Collection View. 
     It also helps to create, dequeue and configure reusable views such as UICollectionViewCell in a type-safe way.
                    DESC
   s.homepage     = "https://github.com/drumnart/Papyrus"

@@ -25,34 +25,4 @@ extension Papyrus where BaseType: ScrollView {
     base.setContentOffset(contentOffset, animated: animated)
     return self
   }
-  
-  @discardableResult public func setScrollsToTop(_ boolValue: Bool) -> Self {
-    base.scrollsToTop = boolValue
-    return self
-  }
-  
-  @discardableResult public func setScrollEnabled(_ boolValue: Bool) -> Self {
-    base.isScrollEnabled = boolValue
-    return self
-  }
-  
-  @discardableResult public func bounceVertical(always: Bool) -> Self {
-    base.alwaysBounceVertical = always
-    return self
-  }
-  
-  @discardableResult public func bounceHorizontal(always: Bool) -> Self {
-    base.alwaysBounceHorizontal = always
-    return self
-  }
-  
-  @discardableResult public func setDecelerationRate(_ rate: ScrollView.DecelerationRate) -> Self {
-    base.decelerationRate = rate.rawValue
-    return self
-  }
-  
-  @discardableResult public func setBackgroundColor(_ bgColor: UIColor) -> Self {
-    base.backgroundColor = bgColor
-    return self
-  }
 }

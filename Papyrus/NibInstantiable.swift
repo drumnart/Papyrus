@@ -21,12 +21,12 @@ extension NibInstantiable {
 extension NibInstantiable where Self: UIView {
   
   /// Instantiating UIView object from nib
-  public func loadFromNib(_ owner: Self? = Self(), options: [AnyHashable: Any]? = nil) -> Self {
+  public func loadFromNib(_ owner: Self? = Self(), options: [UINib.OptionsKey: Any]? = nil) -> Self {
     return Self.loadFromNib(owner, options: options)
   }
   
   /// Instantiating UIView object from nib
-  public static func loadFromNib(_ owner: Self? = Self(), options: [AnyHashable: Any]? = nil) -> Self {
+  public static func loadFromNib(_ owner: Self? = Self(), options: [UINib.OptionsKey: Any]? = nil) -> Self {
     
     let topObjects = nib.instantiate(withOwner: owner, options: options)
     if let owner = owner {

@@ -14,8 +14,8 @@ extension CollectionView {
     case footer
     case any(String)
     
-    static let Header = UICollectionElementKindSectionHeader
-    static let Footer = UICollectionElementKindSectionFooter
+    static let Header = UICollectionView.elementKindSectionHeader
+    static let Footer = UICollectionView.elementKindSectionFooter
     
     public init(_ rawValue: String) {
       switch rawValue {
@@ -60,7 +60,7 @@ extension CollectionView {
     return collectionViewLayout as? UICollectionViewFlowLayout
   }
   
-  @discardableResult open func setScrollDirection(_ direction: UICollectionViewScrollDirection) -> Self {
+  @discardableResult open func setScrollDirection(_ direction: UICollectionView.ScrollDirection) -> Self {
     flowLayout?.scrollDirection = direction
     return self
   }
